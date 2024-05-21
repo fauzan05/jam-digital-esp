@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jam Ledstrip</title>
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.png">
+  <link rel="stylesheet" href="css/bootstrap-reboot.min.css" media="all">
+  <link rel="stylesheet" href="css/style.css" media="all">
+</head>
+<body>
+  <div id="app">
+    <header class="main-header">
+      <section class="header-tanggal">
+        <div class="header-tanggal_big">{{ waktuSekarang.tanggal }}</div>
+        <div class="header-tanggal_small">
+          <div>{{ waktuSekarang.bulan }}</div>
+          <div>{{ waktuSekarang.tahun }}</div>
+        </div>
+      </section>
+
+      <section class="header-jam">
+        {{ waktuSekarang.jam }}:{{ waktuSekarang.menit }}
+      </section>
+    </header>
+
+    <main class="main-content">
+
+      <div style="margin-bottom: 10px">
+        <div class="buttons-main">
+          <button class="button" @click="openJadwal = !openJadwal">Jadwal Sholat</button>
+          <button class="button" @click="matikanAlarm">Matikan Alarm</button>
+        </div>
+
+        <div 
+          class="accordion-panel"
+          :style="styleOpenJadwal"
+          ref="panelJadwal"
+        >
+        <ul>
+          <li v-for="(time, name) in jadwalSholat" :key="name">
+            {{ name }} : {{ time}}
+          </li>
+        </ul>
+        </div>
+      </div>
+
+      <div class="card">
+        <header class="card-header">
+          <div class="card-title">Ledstrip</div>
+        </header>
+        <section class="card-body">
+          <div class="input-field-between">
+            <label for="i_mode">Mode Warna LED : {{ modeWarna }}</label>
+
+            <label class="switch">
+              <input id="i_mode" type="checkbox" v-model="rainbowMode">
+              <span class="switch-slider switch-slider_warna"></span>
+            </label>
+          </div>
+
+          <div class="input-field-between">
+            <div>
+              <label for="i_kecerahan">Kecerahan :</label>
+              <div class="input-kecerahan">
+                <input
+                type="number"
+                class="input-kecerahan"
+                min="0"
+                max="255"
+                v-if="kecerahanEditText"
+                v-model="kecerahan"
+                @blur="kecerahanEditText = false"
+                >
+                <span
+                  v-else
+                  @click="kecerahanEditText = true"
+                >
+                  {{ kecerahan }}
+                </span>
+              </div>
+            </div>
+
+            <div class="input-range">
+              <input id="i_kecerahan" class="input-range_input" type="range" min="0" max="255" v-model="kecerahan">
+            </div>
+          </div>
+
+          <div class="input-field-between">
+            <label for="i_warnaSolid">Variant Warna Solid :</label>
+
+            <select id="i_warnaSolid" v-model="warnaSolid">
+              <option
+                v-for="opt in listWarnaSolid"
+                :key="opt.value"
+                :value="opt.value"
+                > {{ opt.text }}</option>
+            </select>
+          </div>
+        </section>
+      </div>
+
+      <div class="card">
+        <header class="card-header">
+          <div class="card-title">Alarm</div>
+        </header>
+        <section class="card-body">
+          <div class="input-field-between">
+            <label for="alarm-toggle">Aktifkan Alarm</label>
+            <label class="switch">
+              <input id="alarm-toggle" type="checkbox" v-model="alarmOn">
+              <span class="switch-slider"></span>
+            </label>
+          </div>
+
+          <div class="input-field">
+            <label for="i_alarm">Waktu Alarm</label>
+            <input id="i_alarm" type="time" v-model="alarmJam">
+          </div>
+
+          <div class="input-field-between">
+            <div></div>
+            <button class="button" @click="simpanAlarm">Simpan</button>
+          </div>
+        </section>
+      </div>
+
+      <div class="card">
+        <header class="card-header">
+          <div class="card-title">Waktu RTC</div>
+        </header>
+        <section class="card-body">
+          <div class="input-field">
+            <label for="i_tgl">Tanggal</label>
+            <input id="i_tgl" type="date" v-model="rtcTanggal">
+          </div>
+
+          <div class="input-field">
+            <label for="i_jam">Jam</label>
+            <input id="i_jam" type="time" v-model="rtcJam">
+          </div>
+
+          <div class="input-field-between">
+            <div></div>
+            <button class="button" @click="simpanRTC">Simpan</button>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script src="js/sweetalert2.min.js"></script>
+  <script src="js/vue.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

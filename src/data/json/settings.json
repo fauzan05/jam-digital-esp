@@ -1,0 +1,12 @@
+{
+  "led": {
+    "rainbowMode": 1,
+    "kecerahan": 100,
+    "warnaSolid": 4
+  },
+  "alarm": {
+    "toggle": 0,
+    "jam": 13,
+    "menit": 0
+  }
+}
