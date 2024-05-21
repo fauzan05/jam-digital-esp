@@ -1,7 +1,7 @@
 # Jam Digital ESP8266
 
 ## Description
-Ini adalah kode jam digital menggunakan mikrokontroller ESP8266 dengan tampilan digitalnya menggunakan 7 Segment common anoda dan RTC DS3231 sebagai modul untuk menyediakan informasi mengenai waktu. Jam digital ini sudah termasuk jadwal shalat dan alarm yang diatur secara manual menggunakan push button. Suara dari alarm ini dihasilkan oleh buzzer 5v.
+Ini adalah kode jam digital menggunakan mikrokontroller ESP8266 dengan tampilan digitalnya menggunakan 7 Segment common anoda dan RTC DS3231 sebagai modul untuk menyediakan informasi mengenai waktu. Jam digital ini sudah termasuk jadwal shalat dan alarm yang dapat diatur menggunakan halaman web. Suara dari alarm ini dihasilkan oleh buzzer 5v.
 
 ## Tools
 
